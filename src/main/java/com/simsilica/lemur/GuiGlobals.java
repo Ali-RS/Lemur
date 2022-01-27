@@ -273,21 +273,6 @@ public class GuiGlobals {
         return focusNavState;
     }
 
-    /**
-     *  Goes through all of the font page materials and sets
-     *  alpha test and alpha fall-off.
-     */
-    public void fixFont( BitmapFont font ) {
-        for( int i = 0; i < font.getPageSize(); i++ ) {
-            Material m = font.getPage(i);
-            // AlphaTest and AlphaFalloff are deprecated in favor of the material
-            // parameter... in fact in current JME there are no-ops.
-            //m.getAdditionalRenderState().setAlphaTest(true);
-            //m.getAdditionalRenderState().setAlphaFallOff(0.1f);
-            m.setFloat("AlphaDiscardThreshold", 0.1f);
-        }
-    }
-
     private Texture getTexture( Material mat, String name ) {
         MatParam mp = mat.getParam(name);
         if( mp == null ) {
@@ -309,7 +294,6 @@ public class GuiGlobals {
 
     public BitmapFont loadFont( String path ) {
         BitmapFont result = assets.loadFont(path);
-        fixFont(result);
         return result;
     }
 
